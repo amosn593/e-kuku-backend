@@ -11,13 +11,13 @@ class County(models.Model):
     slug = models.SlugField(max_length=20)
 
     class Meta:
-        ordering = ['name']
+        ordering = ('name',)
 
     def __str__(self):
         return f"{self.name}"
 
     def get_absolute_url(self):
-        return f"/{self.slug}/"
+        return f"/{self.slug}/{self.id}/"
 
 
 # SubCounty model
@@ -28,27 +28,29 @@ class Subcounty(models.Model):
     slug = models.SlugField(max_length=20)
 
     class Meta:
-        ordering = ['name']
+        ordering = ('name',)
 
     def __str__(self):
         return f"{self.name}"
 
     def get_absolute_url(self):
-        return f"/{self.slug}/"
+        return f"/{self.slug}/{self.id}/"
 
 # Category model
+
+
 class Category(models.Model):
     name = models.CharField(max_length=15)
     slug = models.SlugField(max_length=20)
 
     class Meta:
-        ordering = ['name']
+        ordering = ('name',)
 
     def __str__(self):
         return f"{self.name}"
 
     def get_absolute_url(self):
-        return f"/{self.slug}/"
+        return f"/{self.slug}/{self.id}/"
 
 # Poultry
 
@@ -68,10 +70,10 @@ class Poultry(models.Model):
     date_posted = models.DateField(auto_now=True)
 
     class Meta:
-        ordering = ['-date_posted']
+        ordering = ('-date_posted',)
 
     def __str__(self):
         return f"{self.name}, {self.date_posted}, {self.price}"
 
     def get_absolute_url(self):
-        return f"/{self.category.slug}/{self.slug}/"
+        return f"/{self.category.slug}/{self.slug}/{self.id}/"
