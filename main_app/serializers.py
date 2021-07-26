@@ -2,22 +2,25 @@ from rest_framework import serializers
 from .models import *
 
 
-class CountySerializer(serializers.Serializer):
+class CountySerializer(serializers.ModelSerializer):
     class Meta:
-        model: County
-        Fields: '__all__'
-        
-class SubcountySerializer(serializers.Serializer):
+        model = County
+        fields = '__all__'
+
+
+class SubcountySerializer(serializers.ModelSerializer):
     class Meta:
-        model: Subcounty
-        Fields: '__all__'
-        
-class CategorySerializer(serializers.Serializer):
+        model = Subcounty
+        fields = '__all__'
+
+
+class CategorySerializer(serializers.ModelSerializer):
     class Meta:
-        model: Category
-        Fields: '__all__'
-        
-class PoultrySerializer(serializers.Serializer):
+        model = Category
+        fields = '__all__'
+
+
+class PoultrySerializer(serializers.ModelSerializer):
     class Meta:
-        model: Poultry
-        Fields: '__all__'
+        model = Poultry
+        fields = "__all__"
