@@ -1,7 +1,7 @@
 from django.db import models
 from PIL import Image
-# from io import BytesIo
-# from django.core.files import File
+from io import BytesIO
+from django.core.files import File
 
 # County model
 
@@ -14,7 +14,7 @@ class County(models.Model):
         ordering = ('name',)
 
     def __str__(self):
-        return f"{self.name}"
+        return f"{self.id}-{self.name}"
 
     def get_absolute_url(self):
         return f"/{self.slug}/{self.id}/"
@@ -31,11 +31,11 @@ class Subcounty(models.Model):
         ordering = ('name',)
 
     def __str__(self):
-        return f"{self.name}"
+        return f"{self.id}-{self.name}"
 
     def get_absolute_url(self):
         return f"/{self.slug}/"
-    
+
     def get_county(self):
         if self.county:
             return f"{self.county.name}"
@@ -52,7 +52,7 @@ class Category(models.Model):
         ordering = ('name',)
 
     def __str__(self):
-        return f"{self.name}"
+        return f"{self.id}-{self.name}"
 
     def get_absolute_url(self):
         return f"/{self.slug}/"
@@ -67,6 +67,8 @@ class Poultry(models.Model):
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE, related_name='poultries')
     image = models.ImageField(upload_to='poultry_images/')
+    thumbnail = models.ImageField(
+        upload_to='poultry_images/', blank=True, null=True)
     county = models.ForeignKey(
         County, on_delete=models.CASCADE, related_name='poultries')
     subcounty = models.ForeignKey(
@@ -78,7 +80,7 @@ class Poultry(models.Model):
         ordering = ('-date_posted',)
 
     def __str__(self):
-        return f"{self.name}, {self.date_posted}, {self.price}"
+        return f"{self.id}-{self.title}, {self.date_posted}, {self.price}"
 
     def get_absolute_url(self):
         return f"/{self.category.slug}/{self.slug}/"
@@ -87,6 +89,31 @@ class Poultry(models.Model):
         if self.image:
             return "http://127.0.0.1:8000" + self.image.url
         return ""
+
+    def get_thumbnail(self):
+        if self.thumbnail:
+            # return "http://127.0.0.1:8000" + self.thumbnail.url
+            pass
+        else:
+            if self.image:
+                self.thumbnail = self.make_thumbnail(self.image.path)
+                self.save()
+
+                return "http://127.0.0.1:8000" + self.thumbnail.url
+            else:
+                return ""
+
+    def make_thumbnail(self, image, size=(300, 148)):
+        img = Image.open(image)
+        img.convert("RGB")
+        img.thumbnail(size)
+
+        thumb_io = BytesIO()
+        img.save(thumb_io, 'JPEG', quality=90)
+
+        thumbnail = File(thumb_io, image.name)
+
+        return thumbnail
 
     def get_county(self):
         if self.county:
