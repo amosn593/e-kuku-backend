@@ -34,7 +34,12 @@ class Subcounty(models.Model):
         return f"{self.name}"
 
     def get_absolute_url(self):
-        return f"/{self.slug}/{self.id}/"
+        return f"/{self.slug}/"
+    
+    def get_county(self):
+        if self.county:
+            return f"{self.county.name}"
+        return ""
 
 # Category model
 
@@ -50,13 +55,13 @@ class Category(models.Model):
         return f"{self.name}"
 
     def get_absolute_url(self):
-        return f"/{self.slug}/{self.id}/"
+        return f"/{self.slug}/"
 
 # Poultry
 
 
 class Poultry(models.Model):
-    name = models.CharField(max_length=40)
+    title = models.CharField(max_length=40)
     slug = models.SlugField(max_length=20)
     description = models.TextField(max_length=100)
     category = models.ForeignKey(
@@ -76,4 +81,19 @@ class Poultry(models.Model):
         return f"{self.name}, {self.date_posted}, {self.price}"
 
     def get_absolute_url(self):
-        return f"/{self.category.slug}/{self.slug}/{self.id}/"
+        return f"/{self.category.slug}/{self.slug}/"
+
+    def get_image(self):
+        if self.image:
+            return "http://127.0.0.1:8000" + self.image.url
+        return ""
+
+    def get_county(self):
+        if self.county:
+            return f"{self.county.name}"
+        return ""
+
+    def get_subcounty(self):
+        if self.subcounty:
+            return f"{self.subcounty.name}"
+        return ""

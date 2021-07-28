@@ -11,7 +11,7 @@ class CountySerializer(serializers.ModelSerializer):
 class SubcountySerializer(serializers.ModelSerializer):
     class Meta:
         model = Subcounty
-        fields = '__all__'
+        fields = ('id', 'name', 'get_county')
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -23,4 +23,6 @@ class CategorySerializer(serializers.ModelSerializer):
 class PoultrySerializer(serializers.ModelSerializer):
     class Meta:
         model = Poultry
-        fields = "__all__"
+        fields = ('id', 'title', 'price', 'description', 'slug', 'date_posted',
+                  'get_image', 'get_county',
+                  'get_subcounty', 'get_absolute_url')
