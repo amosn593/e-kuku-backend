@@ -49,3 +49,13 @@ def poultrychicken(request):
         raise Http404
     serializer = PoultrySerializer(post, many=True)
     return Response(serializer.data)
+
+
+@api_view(["GET"])
+def poultryfeed(request):
+    try:
+        post = Poultry.objects.filter(category=4)
+    except:
+        raise Http404
+    serializer = PoultrySerializer(post, many=True)
+    return Response(serializer.data)

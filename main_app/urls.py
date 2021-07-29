@@ -8,4 +8,5 @@ urlpatterns = [
     path('poultryeggs/', poultryeggs, name="poultryeggs"),
     path('poultrychicks/', poultrychicks, name="poultrychicks"),
     path('poultrychicken/', poultrychicken, name="poultrychicken"),
+    path('poultryfeed/', poultryfeed, name="poultryfeed"),
 ]
