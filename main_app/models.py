@@ -75,6 +75,7 @@ class Poultry(models.Model):
         Subcounty, on_delete=models.CASCADE, related_name='poultries')
     price = models.CharField(max_length=25, default="Negotiable")
     date_posted = models.DateField(auto_now=True)
+    views = models.IntegerField(default=1)
 
     class Meta:
         ordering = ('-date_posted',)
