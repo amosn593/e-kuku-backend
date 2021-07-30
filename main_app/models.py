@@ -81,7 +81,7 @@ class Poultry(models.Model):
         ordering = ('-date_posted',)
 
     def __str__(self):
-        return f"{self.id}-{self.title}, {self.date_posted}, {self.price}"
+        return f"{self.id}-{self.title}, {self.date_posted}, {self.price}, {self.views}"
 
     def get_absolute_url(self):
         return f"/{self.category.slug}/{self.slug}/"

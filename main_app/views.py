@@ -21,6 +21,15 @@ def poultrydetail(request, pk):
     return Response(serializer.data)
 
 
+@api_view(["POST"])
+def poultryview(request, pk):
+    post = get_object_or_404(Poultry, id=pk)
+    current_views = post.views
+    post.views = current_views + 1
+    post.save(update_fields=["views"])
+    return Response("Updated successfully!!!")
+
+
 @api_view(["GET"])
 def poultryeggs(request):
     try:
