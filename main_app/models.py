@@ -8,16 +8,16 @@ from django.core.files import File
 
 class County(models.Model):
     name = models.CharField(max_length=15)
-    slug = models.SlugField(max_length=20)
+    slug = models.SlugField(max_length=50)
 
     class Meta:
         ordering = ('name',)
 
     def __str__(self):
-        return f"{self.id}-{self.name}"
+        return f"{self.pk}-{self.name}"
 
     def get_absolute_url(self):
-        return f"/{self.slug}/{self.id}/"
+        return f"/{self.slug}/{self.pk}/"
 
 
 # SubCounty model
@@ -25,7 +25,7 @@ class Subcounty(models.Model):
     name = models.CharField(max_length=15)
     county = models.ForeignKey(
         County, on_delete=models.CASCADE, related_name='subcounties')
-    slug = models.SlugField(max_length=20)
+    slug = models.SlugField(max_length=50)
 
     class Meta:
         ordering = ('name',)
@@ -46,7 +46,7 @@ class Subcounty(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=15)
-    slug = models.SlugField(max_length=20)
+    slug = models.SlugField(max_length=50)
 
     class Meta:
         ordering = ('name',)
@@ -62,7 +62,7 @@ class Category(models.Model):
 
 class Poultry(models.Model):
     title = models.CharField(max_length=40)
-    slug = models.SlugField(max_length=20)
+    slug = models.SlugField(max_length=50)
     description = models.TextField(max_length=100)
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE, related_name='poultries')
@@ -83,7 +83,7 @@ class Poultry(models.Model):
         ordering = ('-date_posted',)
 
     def __str__(self):
-        return f"{self.id}-{self.title}, {self.date_posted}, {self.price}, {self.views}"
+        return f"{self.pk}-{self.title}, {self.date_posted}, {self.price}, {self.views}"
 
     def get_absolute_url(self):
         return f"/{self.category.slug}/{self.slug}/"
