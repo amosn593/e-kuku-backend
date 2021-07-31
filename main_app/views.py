@@ -43,7 +43,7 @@ def poultryeggs(request):
 @api_view(["GET"])
 def poultrychicks(request):
     try:
-        post = Poultry.objects.filter(category=2)
+        post = Poultry.objects.filter(category=3)
     except:
         raise Http404
     serializer = PoultrySerializer(post, many=True)
@@ -53,7 +53,7 @@ def poultrychicks(request):
 @api_view(["GET"])
 def poultrychicken(request):
     try:
-        post = Poultry.objects.filter(category=3)
+        post = Poultry.objects.filter(category=2)
     except:
         raise Http404
     serializer = PoultrySerializer(post, many=True)
