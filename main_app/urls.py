@@ -1,4 +1,3 @@
-
 from django.urls import path
 from .views import *
 
@@ -10,4 +9,6 @@ urlpatterns = [
     path('poultrychicks/', poultrychicks, name="poultrychicks"),
     path('poultrychicken/', poultrychicken, name="poultrychicken"),
     path('poultryfeed/', poultryfeed, name="poultryfeed"),
+    path('getcounty/', getcounty, name="getcounty"),
+    path('getcategory/', getcategory, name="getcategory"),
 ]

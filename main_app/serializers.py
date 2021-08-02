@@ -11,7 +11,7 @@ class CountySerializer(serializers.ModelSerializer):
 class SubcountySerializer(serializers.ModelSerializer):
     class Meta:
         model = Subcounty
-        fields = ('id', 'name', 'get_county')
+        fields = ('id', 'name', 'county', 'get_county')
 
 
 class CategorySerializer(serializers.ModelSerializer):

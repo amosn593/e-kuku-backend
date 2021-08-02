@@ -68,3 +68,23 @@ def poultryfeed(request):
         raise Http404
     serializer = PoultrySerializer(post, many=True)
     return Response(serializer.data)
+
+
+@api_view(["GET"])
+def getcounty(request):
+    try:
+        counties = County.objects.all()
+    except:
+        raise http404
+    counties = CountySerializer(counties, many=True)
+    return Response(counties.data)
+
+
+@api_view(["GET"])
+def getcategory(request):
+    try:
+        categories = Category.objects.all()
+    except:
+        raise http404
+    categories = CategorySerializer(categories, many=True)
+    return Response(categories.data)

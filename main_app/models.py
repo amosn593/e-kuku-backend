@@ -11,7 +11,7 @@ class County(models.Model):
     slug = models.SlugField(max_length=50)
 
     class Meta:
-        ordering = ('name',)
+        ordering = ('id',)
 
     def __str__(self):
         return f"{self.pk}-{self.name}"
@@ -49,7 +49,7 @@ class Category(models.Model):
     slug = models.SlugField(max_length=50)
 
     class Meta:
-        ordering = ('name',)
+        ordering = ('id',)
 
     def __str__(self):
         return f"{self.id}-{self.name}"
