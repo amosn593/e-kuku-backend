@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import *
+from .models import Category, County, Subcounty, Poultry, Testmodel
 
 
 class CountySerializer(serializers.ModelSerializer):
@@ -23,5 +23,18 @@ class CategorySerializer(serializers.ModelSerializer):
 class PoultrySerializer(serializers.ModelSerializer):
     class Meta:
         model = Poultry
-        fields = ('id', 'title', 'price', 'category', 'views', 'description', 'slug', 'date_posted', 'get_image',
-                  'get_thumbnail', 'get_county', 'get_subcounty', 'location', 'contact', 'get_absolute_url')
+        fields = ('id', 'title', 'price', 'category', 'views', 'description', 'slug', 'date_posted', 'image',
+                  'get_image', 'get_thumbnail', 'get_county', 'get_subcounty', 'location', 'contact', 'get_absolute_url')
+
+
+class PoultryCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Poultry
+        fields = ('title', 'price', 'category', 'description',
+                  'image', 'county', 'subcounty', 'location', 'contact')
+
+
+class TestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Testmodel
+        fields = ('name', 'place', 'image')

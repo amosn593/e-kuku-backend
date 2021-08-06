@@ -28,7 +28,7 @@ class Subcounty(models.Model):
     slug = models.SlugField(max_length=50)
 
     class Meta:
-        ordering = ('name',)
+        ordering = ('id',)
 
     def __str__(self):
         return f"{self.id}-{self.name}"
@@ -62,7 +62,7 @@ class Category(models.Model):
 
 class Poultry(models.Model):
     title = models.CharField(max_length=40)
-    slug = models.SlugField(max_length=50)
+    slug = models.SlugField(max_length=50, default='poultry')
     description = models.TextField(max_length=100)
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE, related_name='poultries')
@@ -81,10 +81,10 @@ class Poultry(models.Model):
     views = models.IntegerField(default=1)
 
     class Meta:
-        ordering = ('-date_posted',)
+        ordering = ('-date_posted', '-id')
 
     def __str__(self):
-        return f"{self.pk}-{self.title}, {self.date_posted}, {self.price}, {self.views}"
+        return f"{self.pk},{self.title},{self.date_posted},{self.price},{self.views}"
 
     def get_absolute_url(self):
         return f"/{self.category.slug}/{self.slug}/"
@@ -127,3 +127,9 @@ class Poultry(models.Model):
         if self.subcounty:
             return f"{self.subcounty.name}"
         return ""
+
+
+class Testmodel(models.Model):
+    name = models.CharField(max_length=10, default="okay_react", null=True)
+    place = models.CharField(max_length=10, default="okay_react", null=True)
+    image = models.ImageField(upload_to='test_images/')

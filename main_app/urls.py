@@ -1,14 +1,17 @@
 from django.urls import path
-from .views import *
+from . import views
 
 urlpatterns = [
-    path('latestpoultry/', latestpoultry, name="latestpoultry"),
-    path('poultrydetail/<str:pk>', poultrydetail, name="poultrydetail"),
-    path('poultryview/<str:pk>', poultryview, name="poultryview"),
-    path('poultryeggs/', poultryeggs, name="poultryeggs"),
-    path('poultrychicks/', poultrychicks, name="poultrychicks"),
-    path('poultrychicken/', poultrychicken, name="poultrychicken"),
-    path('poultryfeed/', poultryfeed, name="poultryfeed"),
-    path('getcounty/', getcounty, name="getcounty"),
-    path('getcategory/', getcategory, name="getcategory"),
+    path('', views.testget, name="home"),
+    path('latestpoultry/', views.latestpoultry, name="latestpoultry"),
+    path('poultrycreate/', views.poultrycreate, name="poultrycreate"),
+    path('poultrydetail/<str:pk>', views.poultrydetail, name="poultrydetail"),
+    path('poultryview/<str:pk>', views.poultryview, name="poultryview"),
+    path('poultryeggs/', views.poultryeggs, name="poultryeggs"),
+    path('poultrychicks/', views.poultrychicks, name="poultrychicks"),
+    path('poultrychicken/', views.poultrychicken, name="poultrychicken"),
+    path('poultryfeed/', views.poultryfeed, name="poultryfeed"),
+    path('getcounty/', views.getcounty, name="getcounty"),
+    path('getsubcounty/<str:pk>', views.getsubcounty, name="getsubcounty"),
+    path('getcategory/', views.getcategory, name="getcategory"),
 ]

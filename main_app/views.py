@@ -1,7 +1,10 @@
 from rest_framework import status
+from PIL import Image
 from rest_framework.decorators import api_view
+from rest_framework.views import APIView
 from rest_framework.response import Response
-from .models import Poultry
+from rest_framework.parsers import MultiPartParser, FormParser, FileUploadParser
+from .models import *
 from .serializers import *
 from django.shortcuts import get_object_or_404
 from django.http.response import Http404
@@ -12,6 +15,17 @@ def latestpoultry(request):
     posts = Poultry.objects.all()
     serializer = PoultrySerializer(posts, many=True)
     return Response(serializer.data)
+
+
+@api_view(["POST"])
+def poultrycreate(request):
+    parser_classes = (MultiPartParser, FormParser)
+    serializer = PoultryCreateSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    print('error', serializer.errors)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(["GET"])
@@ -81,6 +95,16 @@ def getcounty(request):
 
 
 @api_view(["GET"])
+def getsubcounty(request, pk):
+    try:
+        subcounties = Subcounty.objects.filter(county=pk)
+    except:
+        raise http404
+    subcounties = SubcountySerializer(subcounties, many=True)
+    return Response(subcounties.data)
+
+
+@api_view(["GET"])
 def getcategory(request):
     try:
         categories = Category.objects.all()
@@ -88,3 +112,27 @@ def getcategory(request):
         raise http404
     categories = CategorySerializer(categories, many=True)
     return Response(categories.data)
+
+
+@api_view(["GET"])
+def testget(request):
+    tests = Testmodel.objects.all()
+    serializer = TestSerializer(tests, many=True)
+    return Response(serializer.data)
+
+
+@api_view(["GET", "POST"])
+def testget(request):
+    parser_classes = (MultiPartParser, FormParser)
+    if request.method == 'GET':
+        snippets = Testmodel.objects.all()
+        serializer = TestSerializer(snippets, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        serializer = TestSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        print('error', serializer.errors)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
