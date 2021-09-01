@@ -1,3 +1,4 @@
 poultry/.env
 db.sqlite3
 .vscode
+venv
