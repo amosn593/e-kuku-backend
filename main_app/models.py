@@ -1,5 +1,5 @@
 from django.db import models
-
+from autoslug import AutoSlugField
 from PIL import Image
 from io import BytesIO
 from django.core.files import File
@@ -9,8 +9,8 @@ from django.core.files import File
 
 
 class County(models.Model):
-    name = models.CharField(max_length=15)
-    slug = models.SlugField(max_length=50)
+    name = models.CharField(max_length=30)
+    slug = AutoSlugField(populate_from='name')
 
     class Meta:
         ordering = ('id',)
@@ -24,10 +24,10 @@ class County(models.Model):
 
 # SubCounty model
 class Subcounty(models.Model):
-    name = models.CharField(max_length=15)
+    name = models.CharField(max_length=30)
     county = models.ForeignKey(
         County, on_delete=models.CASCADE, related_name='subcounties')
-    slug = models.SlugField(max_length=50)
+    slug = AutoSlugField(populate_from='name')
 
     class Meta:
         ordering = ('id',)
@@ -47,9 +47,9 @@ class Subcounty(models.Model):
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=15)
-    slug = models.SlugField(max_length=50)
-
+    name = models.CharField(max_length=30)
+    slug = AutoSlugField(populate_from='name')
+    
     class Meta:
         ordering = ('id',)
 
@@ -63,8 +63,8 @@ class Category(models.Model):
 
 
 class Poultry(models.Model):
-    title = models.CharField(max_length=40)
-    slug = models.SlugField(max_length=50, default='poultry')
+    title = models.CharField(max_length=100)
+    slug = AutoSlugField(populate_from='title')
     description = models.TextField(max_length=100)
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE, related_name='poultries')
