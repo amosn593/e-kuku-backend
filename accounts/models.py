@@ -6,19 +6,21 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseU
 
 
 class UserAccountManager(BaseUserManager):
-    def create_user(self, email, name, password, **extra_fields):
+    def create_user(self, email, user_name, first_name, last_name, password, ** extra_fields):
+        extra_fields.setdefault('is_active', True)
         if not email:
             raise ValueError('Users must have an email address')
 
         email = self.normalize_email(email)
-        user = self.model(email=email, name=name)
+        user = self.model(email=email, user_name=user_name,
+                          first_name=first_name, last_name=last_name, is_active=True)
 
         user.set_password(password)
         user.save()
 
         return user
 
-    def create_superuser(self, email, name, password, **extra_fields):
+    def create_superuser(self, email, user_name, first_name, last_name, password, **extra_fields):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
         extra_fields.setdefault('is_active', True)
@@ -27,14 +29,15 @@ class UserAccountManager(BaseUserManager):
             raise ValueError(_('Superuser must have is_staff=True.'))
         if extra_fields.get('is_superuser') is not True:
             raise ValueError(_('Superuser must have is_superuser=True.'))
-        return self.create_user(email, name, password, **extra_fields)
+        return self.create_user(email, user_name, first_name, last_name, password, **extra_fields)
 
 
 class UserAccount(AbstractBaseUser, PermissionsMixin):
-    email = models.EmailField(max_length=255, unique=True)
-    name = models.CharField(max_length=255)
+    email = models.EmailField(max_length=50, unique=True)
+    user_name = models.CharField(max_length=8)
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
     date_joined = models.DateTimeField(auto_now=True)
-    # last_name = models.CharField(max_length=255)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
@@ -42,13 +45,13 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
     objects = UserAccountManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['name']
+    REQUIRED_FIELDS = ['user_name', 'first_name', 'last_name']
 
     def get_full_name(self):
-        return self.name
+        return f"{self.first_name} {self.last_name}"
 
     def get_short_name(self):
-        return self.name
+        return self.user_name
 
     class Meta:
         ordering = ('id',)
