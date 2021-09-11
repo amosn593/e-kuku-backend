@@ -1,4 +1,5 @@
 from django.db import models
+from accounts.models import UserAccount
 from autoslug import AutoSlugField
 from PIL import Image
 from io import BytesIO
@@ -49,7 +50,7 @@ class Subcounty(models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=30)
     slug = AutoSlugField(populate_from='name')
-    
+
     class Meta:
         ordering = ('id',)
 
@@ -63,6 +64,8 @@ class Category(models.Model):
 
 
 class Poultry(models.Model):
+    seller = models.ForeignKey(
+        UserAccount, on_delete=models.CASCADE, related_name='sells', null=True)
     title = models.CharField(max_length=100)
     slug = AutoSlugField(populate_from='title')
     description = models.TextField(max_length=100)

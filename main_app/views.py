@@ -1,13 +1,14 @@
-from rest_framework import status
+from rest_framework import status, authentication, permissions
 from PIL import Image
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser, FormParser, FileUploadParser
-from .models import *
-from .serializers import *
+from accounts.models import UserAccount
+from main_app.models import *
+from main_app.serializers import *
 from django.shortcuts import get_object_or_404
-from django.http.response import Http404
+from django.http import Http404
 
 
 @api_view(["GET"])
@@ -18,13 +19,15 @@ def latestpoultry(request):
 
 
 @api_view(["POST"])
+@authentication_classes([authentication.TokenAuthentication])
+@permission_classes([permissions.IsAuthenticated])
 def poultrycreate(request):
     parser_classes = (MultiPartParser, FormParser)
     serializer = PoultryCreateSerializer(data=request.data)
     if serializer.is_valid():
-        serializer.save()
+        serializer.save(seller=request.user)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
-    print('error', serializer.errors)
+    # print('error', serializer.errors)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
