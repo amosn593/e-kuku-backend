@@ -20,8 +20,9 @@ def latestpoultry(request):
 
 @api_view(["POST"])
 @authentication_classes([authentication.TokenAuthentication])
-@permission_classes([permissions.IsAuthenticated])
+# @permission_classes([permissions.IsAuthenticated])
 def poultrycreate(request):
+    print(request.user)
     parser_classes = (MultiPartParser, FormParser)
     serializer = PoultryCreateSerializer(data=request.data)
     if serializer.is_valid():
