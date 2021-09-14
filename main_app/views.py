@@ -1,4 +1,5 @@
-from rest_framework import status, authentication, permissions
+from rest_framework import status, permissions
+from rest_framework_simplejwt import authentication
 from PIL import Image
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.views import APIView
@@ -19,16 +20,14 @@ def latestpoultry(request):
 
 
 @api_view(["POST"])
-@authentication_classes([authentication.TokenAuthentication])
-# @permission_classes([permissions.IsAuthenticated])
+@authentication_classes([authentication.JWTAuthentication])
+@permission_classes([permissions.IsAuthenticated])
 def poultrycreate(request):
-    print(request.user)
     parser_classes = (MultiPartParser, FormParser)
     serializer = PoultryCreateSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save(seller=request.user)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
-    # print('error', serializer.errors)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
