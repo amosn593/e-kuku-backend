@@ -19,6 +19,15 @@ def latestpoultry(request):
     return Response(serializer.data)
 
 
+@api_view(["GET"])
+@authentication_classes([authentication.JWTAuthentication])
+@permission_classes([permissions.IsAuthenticated])
+def mypoultry(request):
+    posts = Poultry.objects.filter(seller=request.user)
+    serializer = PoultrySerializer(posts, many=True)
+    return Response(serializer.data)
+
+
 @api_view(["POST"])
 @authentication_classes([authentication.JWTAuthentication])
 @permission_classes([permissions.IsAuthenticated])

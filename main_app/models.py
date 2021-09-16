@@ -92,7 +92,7 @@ class Poultry(models.Model):
         return f"{self.pk},{self.title},{self.date_posted},{self.price},{self.views}"
 
     def get_absolute_url(self):
-        return f"/{self.category.slug}/{self.slug}/"
+        return f"/{self.category.slug}/{self.slug}"
 
     def get_image(self):
         if self.image:
