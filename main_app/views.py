@@ -35,8 +35,11 @@ def poultrycreate(request):
     parser_classes = (MultiPartParser, FormParser)
     serializer = PoultryCreateSerializer(data=request.data)
     if serializer.is_valid():
-        serializer.save(seller=request.user)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+        try:
+            serializer.save(seller=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        except:
+            return Response("Something went wrong")
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
