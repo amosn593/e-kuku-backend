@@ -124,27 +124,3 @@ def getcategory(request):
         raise http404
     categories = CategorySerializer(categories, many=True)
     return Response(categories.data)
-
-
-@api_view(["GET"])
-def testget(request):
-    tests = Testmodel.objects.all()
-    serializer = TestSerializer(tests, many=True)
-    return Response(serializer.data)
-
-
-@api_view(["GET", "POST"])
-def testget(request):
-    parser_classes = (MultiPartParser, FormParser)
-    if request.method == 'GET':
-        snippets = Testmodel.objects.all()
-        serializer = TestSerializer(snippets, many=True)
-        return Response(serializer.data)
-
-    elif request.method == 'POST':
-        serializer = TestSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        print('error', serializer.errors)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Category, County, Subcounty, Poultry, Testmodel
+from .models import Category, County, Subcounty, Poultry
 
 
 class CountySerializer(serializers.ModelSerializer):
@@ -34,7 +34,4 @@ class PoultryCreateSerializer(serializers.ModelSerializer):
                   'image', 'county', 'subcounty', 'location', 'contact')
 
 
-class TestSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Testmodel
-        fields = ('name', 'place', 'image')
+
