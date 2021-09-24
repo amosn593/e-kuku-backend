@@ -20,6 +20,17 @@ def latestpoultry(request):
 
 
 @api_view(["GET"])
+def poultrysearch(request, search):
+    try:
+        posts = Poultry.objects.filter(
+            title__icontains=search)
+        serializer = PoultrySerializer(posts, many=True)
+        return Response(serializer.data)
+    except:
+        return Response("Something went wrong")
+
+
+@api_view(["GET"])
 @authentication_classes([authentication.JWTAuthentication])
 @permission_classes([permissions.IsAuthenticated])
 def mypoultry(request):
