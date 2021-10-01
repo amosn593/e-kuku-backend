@@ -24,11 +24,11 @@ class PoultrySerializer(serializers.ModelSerializer):
     class Meta:
         model = Poultry
         fields = ('id', 'title', 'price', 'category', 'views', 'description', 'slug', 'date_posted', 'image',
-                  'get_image', 'get_county', 'get_subcounty', 'location', 'contact', 'get_absolute_url')
+                  'get_image', 'get_county', 'get_subcounty', 'location', 'business_name', 'contact', 'get_absolute_url')
 
 
 class PoultryCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Poultry
         fields = ('title', 'price', 'category', 'description',
-                  'image', 'county', 'subcounty', 'location', 'contact')
+                  'image', 'county', 'subcounty', 'location', 'business_name', 'contact')

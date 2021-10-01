@@ -77,6 +77,7 @@ class Poultry(models.Model):
     subcounty = models.ForeignKey(
         Subcounty, on_delete=models.CASCADE, related_name='poultries')
     location = models.CharField(max_length=100)
+    business_name = models.CharField(max_length=15)
     contact = models.CharField(max_length=15)
     price = models.CharField(max_length=25, default="Negotiable")
     date_posted = models.DateField(auto_now=True)
