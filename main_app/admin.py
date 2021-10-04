@@ -15,7 +15,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 class PoultryAdmin(admin.ModelAdmin):
-    list_display = ('seller', 'title', 'description', 'location', 'business_name',
+    list_display = ('id', 'seller', 'title', 'category', 'county', 'subcounty', 'description', 'location', 'business_name',
                     'contact', 'price', 'date_posted', 'approved')
 
 
