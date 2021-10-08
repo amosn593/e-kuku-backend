@@ -45,16 +45,7 @@ def mypoultry(request):
         return Response(status=status.HTTP_404_NOT_FOUND)
 
 
-@api_view(["DELETE"])
-@authentication_classes([authentication.JWTAuthentication])
-@permission_classes([permissions.IsAuthenticated])
-def mypoultrydelete(request, pk):
-    try:
-        post = Poultry.objects.get(seller=request.user, pk=pk)
-        post.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
-    except:
-        return Response(status=status.HTTP_404_NOT_FOUND)
+
 
 
 @api_view(["POST"])
@@ -70,6 +61,18 @@ def poultrycreate(request):
         except:
             return Response(status=status.HTTP_404_NOT_FOUND)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(["DELETE"])
+@authentication_classes([authentication.JWTAuthentication])
+@permission_classes([permissions.IsAuthenticated])
+def mypoultrydelete(request, pk):
+    try:
+        post = Poultry.objects.get(seller=request.user, pk=pk)
+        post.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    except:
+        return Response(status=status.HTTP_404_NOT_FOUND)
 
 
 @api_view(["GET"])
