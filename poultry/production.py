@@ -28,7 +28,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['e-kuku.co.ke', 'www.e-kuku.co.ke']
+ALLOWED_HOSTS = ['backend.e-kuku.co.ke', 'www.backend.e-kuku.co.ke']
 
 
 # Application definition
