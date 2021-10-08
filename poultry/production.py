@@ -26,9 +26,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['www.e-kuku.co.ke', 'https://e-kuku.co.ke']
+ALLOWED_HOSTS = ['e-kuku.co.ke', 'www.e-kuku.co.ke']
 
 
 # Application definition
@@ -198,7 +198,6 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
 
 
 AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
