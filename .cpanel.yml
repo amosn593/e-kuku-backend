@@ -1,5 +1,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/ekukucok/ekuku-backend
+    - export DEPLOYPATH=/home/ekukucok/ekuku_live
     - /bin/cp -a * $DEPLOYPATH

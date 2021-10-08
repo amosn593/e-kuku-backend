@@ -97,12 +97,12 @@ WSGI_APPLICATION = 'poultry.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': '',
         'USER': '',
         'PASSWORD': '',
         'HOST': '',
-        'PORT': '',
+        'PORT': '3306',
     }
 }
 
