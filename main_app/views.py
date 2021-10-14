@@ -45,9 +45,6 @@ def mypoultry(request):
         return Response(status=status.HTTP_404_NOT_FOUND)
 
 
-
-
-
 @api_view(["POST"])
 @authentication_classes([authentication.JWTAuthentication])
 @permission_classes([permissions.IsAuthenticated])
@@ -100,7 +97,7 @@ def poultryview(request, pk):
 @api_view(["GET"])
 def poultryeggs(request):
     try:
-        post = Poultry.objects.filter(category=1)
+        post = Poultry.objects.filter(category__name__icontains="eggs")
         serializer = PoultrySerializer(post, many=True)
         return Response(serializer.data)
     except:
@@ -110,7 +107,7 @@ def poultryeggs(request):
 @api_view(["GET"])
 def poultrychicken(request):
     try:
-        post = Poultry.objects.filter(category=2)
+        post = Poultry.objects.filter(category__name__icontains="Chicken")
         serializer = PoultrySerializer(post, many=True)
         return Response(serializer.data)
     except:
@@ -120,7 +117,7 @@ def poultrychicken(request):
 @api_view(["GET"])
 def poultrychicks(request):
     try:
-        post = Poultry.objects.filter(category=3)
+        post = Poultry.objects.filter(category__name__icontains="Chicks")
         serializer = PoultrySerializer(post, many=True)
         return Response(serializer.data)
     except:
@@ -130,7 +127,7 @@ def poultrychicks(request):
 @api_view(["GET"])
 def poultryfeed(request):
     try:
-        post = Poultry.objects.filter(category=4)
+        post = Poultry.objects.filter(category__name__icontains="Feeds")
         serializer = PoultrySerializer(post, many=True)
         return Response(serializer.data)
     except:
@@ -140,7 +137,8 @@ def poultryfeed(request):
 @api_view(["GET"])
 def poultrystructure(request):
     try:
-        post = Poultry.objects.filter(category=6)
+        post = Poultry.objects.filter(
+            category__name__icontains="Poultry Facilities")
         serializer = PoultrySerializer(post, many=True)
         return Response(serializer.data)
     except:

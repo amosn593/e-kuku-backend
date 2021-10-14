@@ -195,7 +195,6 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
 
 
-
 AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
@@ -212,3 +211,16 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# SECURE COOKIES
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
+
+SECURE_HSTS_SECONDS = 3153600045884155151
+SECURE_HSTS_INCLUDE_SUBDOMAINS = False
+SECURE_HSTS_PRELOAD = False
+
+SECURE_SSL_REDIRECT = False
+
+SECURE_REFERRER_POLICY = "strict-origin"
+SECURE_BROWSER_XSS_FILTER = False
