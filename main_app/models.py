@@ -68,7 +68,7 @@ class Poultry(models.Model):
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='sells', null=True)
     title = models.CharField(max_length=100)
     slug = AutoSlugField(populate_from='title')
-    description = models.TextField(max_length=100)
+    description = models.TextField(max_length=255)
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE, related_name='poultries')
     image = models.ImageField(upload_to='poultry_images/')
@@ -77,11 +77,12 @@ class Poultry(models.Model):
     subcounty = models.ForeignKey(
         Subcounty, on_delete=models.CASCADE, related_name='poultries')
     location = models.CharField(max_length=100)
-    business_name = models.CharField(max_length=15)
+    business_name = models.CharField(max_length=50)
     contact = models.CharField(max_length=15)
-    price = models.CharField(max_length=25, default="Negotiable")
+    price = models.CharField(max_length=50, default="Negotiable")
     date_posted = models.DateField(auto_now=True)
     approved = models.BooleanField(default=False)
+    sponsored = models.BooleanField(default=False)
     views = models.IntegerField(default=1)
 
     class Meta:
@@ -107,5 +108,3 @@ class Poultry(models.Model):
         if self.subcounty:
             return f"{self.subcounty.name}"
         return ""
-
-
