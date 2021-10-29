@@ -11,6 +11,7 @@ admin.site.index_title = 'E-KUKU administration'
 
 urlpatterns = [
     path('main/', include('main_app.urls')),
+    path('mpesa/', include('mpesa.urls')),
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.jwt')),
     path('admin/', admin.site.urls),

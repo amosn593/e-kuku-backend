@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     'storages',
     'main_app',
     'accounts',
+    'mpesa',
 ]
 
 CORS_ALLOWED_ORIGINS = [
