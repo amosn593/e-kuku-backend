@@ -23,7 +23,7 @@ class CategorySerializer(serializers.ModelSerializer):
 class PoultrySerializer(serializers.ModelSerializer):
     class Meta:
         model = Poultry
-        fields = ('id', 'title', 'price', 'category', 'views', 'description', 'slug', 'date_posted', 'image',
+        fields = ('id', 'title', 'price', 'category', 'views', 'description', 'slug', 'date_posted', 'image', 'sponsored', 'approved',
                   'get_image', 'get_county', 'get_subcounty', 'location', 'business_name', 'contact', 'get_absolute_url')
 
 

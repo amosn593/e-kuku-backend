@@ -26,7 +26,8 @@ def latestpoultry(request):
 def poultrysearch(request, search):
     try:
         posts = Poultry.objects.filter(
-            title__icontains=search)
+            title__icontains=search) | Poultry.objects.filter(
+            category__name__icontains=search)
         serializer = PoultrySerializer(posts, many=True)
         return Response(serializer.data)
     except:

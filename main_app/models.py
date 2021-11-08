@@ -81,8 +81,8 @@ class Poultry(models.Model):
     contact = models.CharField(max_length=15)
     price = models.CharField(max_length=50, default="Negotiable")
     date_posted = models.DateField(auto_now=True)
-    approved = models.BooleanField(default=False)
-    sponsored = models.BooleanField(default=False)
+    approved = models.CharField(default=False, max_length=10)
+    sponsored = models.CharField(default=False, max_length=10)
     views = models.IntegerField(default=1)
 
     class Meta:
