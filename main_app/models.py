@@ -96,7 +96,12 @@ class Poultry(models.Model):
 
     def get_image(self):
         if self.image:
-            return self.image.url
+            if settings.DEBUG == True:
+                # Local development
+                return 'http://127.0.0.1:8000' + self.image.url
+            else:
+                # Production Development
+                return self.image.url
         return ""
 
     def get_county(self):
