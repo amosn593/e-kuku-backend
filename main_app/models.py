@@ -10,7 +10,7 @@ from django.core.files import File
 
 
 class County(models.Model):
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=30, unique=True)
     slug = AutoSlugField(populate_from='name')
 
     class Meta:
@@ -25,7 +25,7 @@ class County(models.Model):
 
 # SubCounty model
 class Subcounty(models.Model):
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=30, unique=True)
     county = models.ForeignKey(
         County, on_delete=models.CASCADE, related_name='subcounties')
     slug = AutoSlugField(populate_from='name')
@@ -48,7 +48,7 @@ class Subcounty(models.Model):
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=30, unique=True)
     slug = AutoSlugField(populate_from='name')
 
     class Meta:
