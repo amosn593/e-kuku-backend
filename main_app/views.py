@@ -139,7 +139,7 @@ def poultryfeed(request):
 def poultrystructure(request):
     try:
         post = Poultry.objects.filter(
-            category__name__icontains="Poultry Facilities")
+            category__name__icontains="Facilities")
         serializer = PoultrySerializer(post, many=True)
         return Response(serializer.data)
     except:
