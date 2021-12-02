@@ -55,11 +55,11 @@ DATABASES = {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
             'charset': 'utf8mb4',
         },
-        'NAME': '',
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',
-        'PORT': '3306',
+        'NAME': config('LIVE_DB_NAME'),
+        'USER': config('LIVE_DB_USER'),
+        'PASSWORD': config('LIVE_DB_PASSWORD'),
+        'HOST': config('LIVE_DB_HOST'),
+        'PORT': config('LIVE_DB_PORT'),
     }
 }
 
