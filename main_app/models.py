@@ -48,7 +48,7 @@ class Subcounty(models.Model):
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=30, unique=True)
+    name = models.CharField(max_length=30)
     slug = AutoSlugField(populate_from='name')
 
     class Meta:
