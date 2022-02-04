@@ -13,11 +13,9 @@ from django.http import Http404
 
 
 @api_view(["GET"])
-@authentication_classes([authentication.JWTAuthentication])
-@permission_classes([permissions.IsAuthenticated])
 def latestpoultry(request):
     try:
-        posts = Poultry.objects.all()
+        posts = Poultry.objects.all()[:12]
         serializer = PoultrySerializer(posts, many=True)
         return Response(serializer.data)
     except:
@@ -25,8 +23,6 @@ def latestpoultry(request):
 
 
 @api_view(["GET"])
-@authentication_classes([authentication.JWTAuthentication])
-@permission_classes([permissions.IsAuthenticated])
 def poultrysearch(request, search):
     try:
         posts = Poultry.objects.filter(
@@ -78,8 +74,6 @@ def mypoultrydelete(request, pk):
 
 
 @api_view(["GET"])
-@authentication_classes([authentication.JWTAuthentication])
-@permission_classes([permissions.IsAuthenticated])
 def poultrydetail(request, pk):
     try:
         post = Poultry.objects.get(pk=pk)
@@ -90,8 +84,6 @@ def poultrydetail(request, pk):
 
 
 @api_view(["POST"])
-@authentication_classes([authentication.JWTAuthentication])
-@permission_classes([permissions.IsAuthenticated])
 def poultryview(request, pk):
     try:
         post = Poultry.objects.get(pk=pk)
@@ -104,11 +96,9 @@ def poultryview(request, pk):
 
 
 @api_view(["GET"])
-@authentication_classes([authentication.JWTAuthentication])
-@permission_classes([permissions.IsAuthenticated])
 def poultryeggs(request):
     try:
-        post = Poultry.objects.filter(category__name__icontains="eggs")
+        post = Poultry.objects.filter(category__name__icontains="eggs")[:12]
         serializer = PoultrySerializer(post, many=True)
         return Response(serializer.data)
     except:
@@ -116,11 +106,9 @@ def poultryeggs(request):
 
 
 @api_view(["GET"])
-@authentication_classes([authentication.JWTAuthentication])
-@permission_classes([permissions.IsAuthenticated])
 def poultrychicken(request):
     try:
-        post = Poultry.objects.filter(category__name__icontains="Chicken")
+        post = Poultry.objects.filter(category__name__icontains="Chicken")[:12]
         serializer = PoultrySerializer(post, many=True)
         return Response(serializer.data)
     except:
@@ -128,11 +116,9 @@ def poultrychicken(request):
 
 
 @api_view(["GET"])
-@authentication_classes([authentication.JWTAuthentication])
-@permission_classes([permissions.IsAuthenticated])
 def poultrychicks(request):
     try:
-        post = Poultry.objects.filter(category__name__icontains="Chicks")
+        post = Poultry.objects.filter(category__name__icontains="Chicks")[:12]
         serializer = PoultrySerializer(post, many=True)
         return Response(serializer.data)
     except:
@@ -140,11 +126,9 @@ def poultrychicks(request):
 
 
 @api_view(["GET"])
-@authentication_classes([authentication.JWTAuthentication])
-@permission_classes([permissions.IsAuthenticated])
 def poultryfeed(request):
     try:
-        post = Poultry.objects.filter(category__name__icontains="Feeds")
+        post = Poultry.objects.filter(category__name__icontains="Feeds")[:12]
         serializer = PoultrySerializer(post, many=True)
         return Response(serializer.data)
     except:
@@ -152,12 +136,10 @@ def poultryfeed(request):
 
 
 @api_view(["GET"])
-@authentication_classes([authentication.JWTAuthentication])
-@permission_classes([permissions.IsAuthenticated])
 def poultrystructure(request):
     try:
         post = Poultry.objects.filter(
-            category__name__icontains="Facilities")
+            category__name__icontains="Facilities")[:12]
         serializer = PoultrySerializer(post, many=True)
         return Response(serializer.data)
     except:
@@ -165,8 +147,6 @@ def poultrystructure(request):
 
 
 @api_view(["GET"])
-@authentication_classes([authentication.JWTAuthentication])
-@permission_classes([permissions.IsAuthenticated])
 def getcounty(request):
     try:
         counties = County.objects.all()
@@ -177,8 +157,6 @@ def getcounty(request):
 
 
 @api_view(["GET"])
-@authentication_classes([authentication.JWTAuthentication])
-@permission_classes([permissions.IsAuthenticated])
 def getsubcounty(request, pk):
     try:
         subcounties = Subcounty.objects.filter(county=pk)
@@ -189,8 +167,6 @@ def getsubcounty(request, pk):
 
 
 @api_view(["GET"])
-@authentication_classes([authentication.JWTAuthentication])
-@permission_classes([permissions.IsAuthenticated])
 def getcategory(request):
     try:
         categories = Category.objects.all()
